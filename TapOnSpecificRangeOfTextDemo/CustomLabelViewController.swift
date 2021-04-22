@@ -91,6 +91,10 @@ class CustomLabelViewController: UIViewController {
         let attributeString = NSAttributedString(string: text, attributes: textAttribute)
 
         let label = CustomMultiTouchLabel()
+        let texts = text.components(separatedBy: "+")
+        texts.forEach { (value) in
+            label.observeStrings.append(value)
+        }
         label.tag = index
         label.lineBreakMode = .byCharWrapping
         label.attributedText = attributeString

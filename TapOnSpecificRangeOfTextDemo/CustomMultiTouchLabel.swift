@@ -31,8 +31,8 @@ class CustomMultiTouchLabel: UILabel {
             return container
         }
     }
-    
-    var observeString = [String: String]()
+
+    var observeStrings = [String]()
     var requireUpdateLineBreaking: Bool = false
     var keyWord = String()
     
@@ -72,15 +72,16 @@ class CustomMultiTouchLabel: UILabel {
                                                     fractionOfDistanceBetweenInsertionPoints: nil)
         
         var ranges = [NSRange]()
-        observeString.forEach { key, value in
-            ranges.append((texts as NSString).range(of: key))
+        observeStrings.forEach { value in
+            ranges.append((texts as NSString).range(of: value))
         }
         
         for range in ranges where NSLocationInRange(tapIndex, range) {
             if let texts = text,
-               let convertRange = Range(range, in: texts),
-               let word = observeString[String(texts[convertRange])] {
+               let convertRange = Range(range, in: texts) {
+                let word = String(texts[convertRange])
                 keyWord = word
+                print(keyWord)
             }
         }
     }
